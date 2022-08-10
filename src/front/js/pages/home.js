@@ -7,20 +7,38 @@ export const Home = () => {
 	const { store, actions } = useContext(Context);
 
 	return (
-		<div className="text-center mt-5">
-			<h1>Hello Rigo!!</h1>
-			<p>
-				<img src={rigoImageUrl} />
-			</p>
-			<div className="alert alert-info">
-				{store.message || "Loading message from the backend (make sure your python backend is running)..."}
+		<div>
+			<div id="login" className="gradient-custom-3">
+
+				<h3 class="text-center text-white pt-5" >Login form</h3>
+				<div className="container">
+					<div id="login-row" class="row justify-content-center align-items-center">
+						<div id="login-column" class="col-md-6">
+							<div id="login-box" class="col-md-12">
+								<form id="login-form" class="form" action="" method="post">
+									<h3 class="text-center text-info">Login</h3>
+									<div class="form-group">
+										<label for="username" class="text-info">Username:</label><br />
+										<input type="text" name="username" id="username" class="form-control" />
+									</div>
+									<div class="form-group">
+										<label for="password" class="text-info">Password:</label><br />
+										<input type="text" name="password" id="password" class="form-control" />
+									</div>
+									<div class="form-group">
+										<label for="remember-me" class="text-info"><span>Remember me</span> <span><input id="remember-me" name="remember-me" type="checkbox" /></span></label><br />
+										<input type="submit" name="submit" class="btn btn-info btn-md" value="submit" />
+									</div>
+									<div id="register-link" class="text-right">
+										<a href="#" class="text-info">Registrarse</a>
+									</div>
+
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
-			<p>
-				This boilerplate comes with lots of documentation:{" "}
-				<a href="https://github.com/4GeeksAcademy/react-flask-hello/tree/95e0540bd1422249c3004f149825285118594325/docs">
-					Read documentation
-				</a>
-			</p>
 		</div>
 	);
 };
