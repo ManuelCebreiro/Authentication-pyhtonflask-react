@@ -5,24 +5,30 @@ import "../../styles/home.css";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
-	const { email, setEmail } = useState("");
-	const { password, setPassword } = useState("")
-
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("")
+	const token = sessionStorage.getItem("token");
 	const handleClick = () => {
 
 		const opts = {
 			method: 'POST',
+			headers: {
+				"Content-Type": "application/json",
+			},
 			body: JSON.stringify({
 				email: email,
 				password: password
 			})
 		}
-		fetch("https://3001-manuelcebre-authenticat-j021ujkzxq1.ws-eu61.gitpod.io/api/token", opts)
+		fetch("https://3001-manuelcebre-authenticat-ner8jleetsr.ws-eu61.gitpod.io/api/token", opts)
 			.then(resp => {
 				if (resp.status === 200) return resp.json();
 				else alert("Ha habido un error");
 			})
-			.then()
+			.then(data => {
+				console.log("this came from the backend", data)
+				sessionStorage.setItem("token", data.accesss_token);
+			})
 			.catch(error => {
 				console.error("Hubo un error", error);
 			})
@@ -32,7 +38,6 @@ export const Home = () => {
 	return (
 		<div className="gradient-custom-3">
 			<div id="login">
-
 				<h3 class="text-center text-white pt-5 mt-0 mb-4" >Login form</h3>
 				<div className="container vh-100">
 					<div id="login-row" class="row justify-content-center align-items-center">
@@ -53,7 +58,7 @@ export const Home = () => {
 										<input type="submit" name="submit" class="btn btn-info btn-md" value="submit" />
 									</div> */}
 									<div id="register-link" class="text-right">
-										<button href="#" class="text-info" onClick={handleClick}>Registrarse</button>
+										<button class="text-info" onClick={() => { handleClick }}>Registrarse</button>
 									</div>
 
 								</form>
