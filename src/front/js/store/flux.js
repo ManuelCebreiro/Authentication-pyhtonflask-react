@@ -2,7 +2,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			token: "",
-			datoregister: ""
+			datoregister: "",
+			email: "",
+			password: "",
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -40,8 +42,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 				sessionStorage.setItem("token", "")
 				setStore({ token: "" })
 			},
-			register: (mail, pass, name) => {
-				fetch("https://3001-manuelcebre-authenticat-yp4uugxohtx.ws-eu62.gitpod.io/api/token", {
+			register: (mail, pass) => {
+				fetch("https://3001-manuelcebre-authenticat-yp4uugxohtx.ws-eu62.gitpod.io/api/register", {
 					method: 'POST',
 					headers: {
 						"Content-Type": "application/json"
@@ -49,15 +51,23 @@ const getState = ({ getStore, getActions, setStore }) => {
 					body: JSON.stringify({
 						"password": pass,
 						"email": mail,
-						"name": name
 					})
 				})
 					.then((respuestaregistro) => {
 						if (respuestaregistro.status == 200) {
-							setStore({ datoregister: datoregister })
+							setStore({ datoregister: datoregister });
+							alert("Registrado correctamente")
 						}
+						else
+							alert("No has podido registrarte")
 					})
 
+			},
+			getPass: (pass) => {
+				setStore({ password: pass });
+			},
+			getMail: (mail) => {
+				setStore({ email: mail });
 			},
 
 
