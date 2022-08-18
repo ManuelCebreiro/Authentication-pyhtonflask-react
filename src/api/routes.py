@@ -22,3 +22,14 @@ def create_token():
 
     access_token = create_access_token(identity=email)
     return jsonify(access_token=access_token)
+
+
+@api.route('/register', methods=["POST"])
+def user_register():
+    email = request.json.get("email")
+    name = request.json.get("name")
+    password = request.json.get("password")
+    user = User(email = email, password = password, name = name)
+    db.session.add(user)
+    db.session.commit()
+    return jsonify(({"msg":"Usuario registrado"}))
