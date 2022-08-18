@@ -33,12 +33,6 @@ export const Demo = () => {
 												<input type="password" id="form3Example4cg" className="form-control form-control-lg" />
 												<label className="form-label" for="form3Example4cg">Password</label>
 											</div>
-
-											<div className="form-outline mb-4">
-												<input type="password" id="form3Example4cdg" className="form-control form-control-lg" />
-												<label className="form-label" for="form3Example4cdg">Repeat your password</label>
-											</div>
-
 											<div className="form-check d-flex justify-content-center mb-5">
 												<input className="form-check-input me-2" type="checkbox" value="" id="form2Example3cg" />
 												<label className="form-check-label" for="form2Example3g">

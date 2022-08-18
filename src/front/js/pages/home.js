@@ -20,7 +20,7 @@ export const Home = () => {
 								<div id="login-form" className="form" action="" method="post">
 									<h3 className="text-center text-info">Login</h3>
 									<div className="form-group">
-										<label for="username" className="text-info">Username:</label><br />
+										<label for="username" className="text-info">Email:</label><br />
 										<input type="text" name="username" id="username" className="form-control" value={email} onChange={(e) => setEmail(e.target.value)} />
 									</div>
 									<div className="form-group">

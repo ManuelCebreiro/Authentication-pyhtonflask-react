@@ -2,6 +2,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			token: "",
+			datoregister: ""
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -38,6 +39,25 @@ const getState = ({ getStore, getActions, setStore }) => {
 			logOut: () => {
 				sessionStorage.setItem("token", "")
 				setStore({ token: "" })
+			},
+			register: (mail, pass, name) => {
+				fetch("https://3001-manuelcebre-authenticat-yp4uugxohtx.ws-eu62.gitpod.io/api/token", {
+					method: 'POST',
+					headers: {
+						"Content-Type": "application/json"
+					},
+					body: JSON.stringify({
+						"password": pass,
+						"email": mail,
+						"name": name
+					})
+				})
+					.then((respuestaregistro) => {
+						if (respuestaregistro.status == 200) {
+							setStore({ datoregister: datoregister })
+						}
+					})
+
 			},
 
 
