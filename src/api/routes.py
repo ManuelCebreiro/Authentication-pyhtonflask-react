@@ -28,9 +28,18 @@ def create_token():
 @api.route('/register', methods=["POST"])
 def user_register():
     email = request.json.get("email")
-    name = request.json.get("name")
     password = request.json.get("password")
-    user = User(email = email, password = password, name = name)
+    user = User(email = email, password = password)
     db.session.add(user)
     db.session.commit()
     return jsonify(({"msg":"Usuario registrado"}))
+
+@api.route('/private', methods=["GET"])
+@jwt_required()
+def zone_private():
+    identity = get_jwt_identity()
+    user = User.query.filter_by(email = identity).one_or_none()
+    if user:
+        return jsonify({"Correcto":True}),200
+    else:
+        return jsonify({"Correcto":False}),400

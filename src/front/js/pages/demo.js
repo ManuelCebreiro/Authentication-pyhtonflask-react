@@ -5,6 +5,8 @@ import { Context } from "../store/appContext";
 
 export const Demo = () => {
 	const { store, actions } = useContext(Context);
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("")
 
 	return (
 		<div className="container-fluid p-0" id="bodies">
@@ -16,35 +18,33 @@ export const Demo = () => {
 								<div className="card" style={{ borderRadius: "15px" }}>
 									<div className="card-body p-5">
 										<h2 className="text-uppercase text-center mb-5">Create an account</h2>
-
 										<form>
 											<div className="form-outline mb-4">
-												<input type="email" id="form3Example3cg" className="form-control form-control-lg" />
-												<label className="form-label" for="form3Example3cg"
+												<input type="email" id="form3Example3cg" className="form-control form-control-lg"
 													onChange={(e) => {
-														actions.getMail(e.target.value);
-													}}
+														setEmail(e.target.value);
+													}} />
+												<label className="form-label" for="form3Example3cg"
+
 												>Your Email</label>
 											</div>
-
 											<div className="form-outline mb-4">
-												<input type="password" id="form3Example4cg" className="form-control form-control-lg" />
-												<label className="form-label" for="form3Example4cg"
+												<input type="password" id="form3Example4cg" className="form-control form-control-lg"
 													onChange={(e) => {
-														actions.getPass(e.target.value);
-													}}
+														setPassword(e.target.value);
+													}} />
+												<label className="form-label" for="form3Example4cg"
+
 												>Password</label>
 											</div>
 
 											<div className="d-flex justify-content-center">
-
-												<button type="button"
-													className="btn btn-success btn-block btn-lg gradient-custom-4 text-body"
-
-													onClick={(email, password) => actions.register(email, password)
-													}
-
-												>Register</button>
+												<Link to="/" onClick={() => actions.register(email, password)}>
+													<button type="button"
+														className="btn btn-success btn-block btn-lg gradient-custom-4 text-body"
+													>Register
+													</button>
+												</Link>
 											</div>
 
 											<p className="text-center text-muted mt-5 mb-0">Have already an account? <a href="#!"

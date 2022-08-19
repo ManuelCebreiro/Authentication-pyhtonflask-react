@@ -2,9 +2,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			token: "",
-			datoregister: "",
-			email: "",
-			password: "",
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -13,7 +10,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			login: (mail, pass) => {
-				fetch("https://3001-manuelcebre-authenticat-yp4uugxohtx.ws-eu62.gitpod.io/api/token", {
+				fetch("https://3001-manuelcebre-authenticat-emqrxrkwqdd.ws-eu62.gitpod.io/api/token", {
 					method: 'POST',
 					headers: {
 						"Content-Type": "application/json"
@@ -43,7 +40,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({ token: "" })
 			},
 			register: (mail, pass) => {
-				fetch("https://3001-manuelcebre-authenticat-yp4uugxohtx.ws-eu62.gitpod.io/api/register", {
+				fetch("https://3001-manuelcebre-authenticat-emqrxrkwqdd.ws-eu62.gitpod.io/api/register", {
 					method: 'POST',
 					headers: {
 						"Content-Type": "application/json"
@@ -55,7 +52,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 					.then((respuestaregistro) => {
 						if (respuestaregistro.status == 200) {
-							setStore({ datoregister: datoregister });
 							alert("Registrado correctamente")
 						}
 						else
@@ -63,17 +59,26 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 
 			},
-			getPass: (pass) => {
-				setStore({ password: pass });
-			},
-			getMail: (mail) => {
-				setStore({ email: mail });
-			},
+			// privada: (mail, pass) => {
+			// 	fetch("https://3001-manuelcebre-authenticat-emqrxrkwqdd.ws-eu62.gitpod.io/api/register", {
+			// 		method: 'POST',
+			// 		headers: {
+			// 			"Content-Type": "application/json"
+			// 		},
+			// 		body: JSON.stringify({
+			// 			"password": pass,
+			// 			"email": mail,
+			// 		})
+			// 	})
+			// 		.then((respuestaregistro) => {
+			// 			if (respuestaregistro.status == 200) {
+			// 				alert("Registrado correctamente")
+			// 			}
+			// 			else
+			// 				alert("No has podido registrarte")
+			// 		})
 
-
-
-
-
+			// },
 			getMessage: async () => {
 				try {
 					// fetching data from the backend
