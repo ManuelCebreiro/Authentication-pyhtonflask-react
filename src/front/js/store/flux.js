@@ -1,7 +1,10 @@
+import { Navigate } from "react-router-dom";
+
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			token: "",
+			accesoprivado: ""
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -33,11 +36,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			recuperate: () => {
 				let datotoken = sessionStorage.getItem("token")
-				setStore({ token: datotoken })
+				if (datotoken && datotoken !== "" && datotoken !== null && datotoken !== undefined)
+					setStore({ token: datotoken })
 			},
 			logOut: () => {
-				sessionStorage.setItem("token", "")
+				sessionStorage.removeItem("token")
 				setStore({ token: "" })
+				setStore({ accesoprivado: "" })
 			},
 			register: (mail, pass) => {
 				fetch("https://3001-manuelcebre-authenticat-emqrxrkwqdd.ws-eu62.gitpod.io/api/register", {
@@ -59,26 +64,26 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 
 			},
-			// privada: (mail, pass) => {
-			// 	fetch("https://3001-manuelcebre-authenticat-emqrxrkwqdd.ws-eu62.gitpod.io/api/register", {
-			// 		method: 'POST',
-			// 		headers: {
-			// 			"Content-Type": "application/json"
-			// 		},
-			// 		body: JSON.stringify({
-			// 			"password": pass,
-			// 			"email": mail,
-			// 		})
-			// 	})
-			// 		.then((respuestaregistro) => {
-			// 			if (respuestaregistro.status == 200) {
-			// 				alert("Registrado correctamente")
-			// 			}
-			// 			else
-			// 				alert("No has podido registrarte")
-			// 		})
+			privada: () => {
+				const store = getStore();
+				fetch("https://3001-manuelcebre-authenticat-emqrxrkwqdd.ws-eu62.gitpod.io/api/private", {
+					method: 'GET',
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: "Bearer " + store.token,		//PROPIO DE JWT, COMO PIDES EL TOKEN
+						Accept: "application/json"					//SOLO VOY A ACEPTAR JSON
+					},
+				})
+					.then((respuestadelback) => {					//{"Correcto":True}),200
+						if (respuestadelback.status == 200) {
+							// alert("Ya eres un usuario válido para ver esta página")
+							setStore({ accesoprivado: true })
+						}
 
-			// },
+						// alert("No tienes permiso"), 400
+					})
+
+			},
 			getMessage: async () => {
 				try {
 					// fetching data from the backend
