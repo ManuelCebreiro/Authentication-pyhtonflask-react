@@ -13,7 +13,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			login: (mail, pass) => {
-				fetch("https://3001-manuelcebre-authenticat-emqrxrkwqdd.ws-eu62.gitpod.io/api/token", {
+				fetch(process.env.BACKEND_URL + "/api/token", {
 					method: 'POST',
 					headers: {
 						"Content-Type": "application/json"
@@ -45,7 +45,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({ accesoprivado: "" })
 			},
 			register: (mail, pass) => {
-				fetch("https://3001-manuelcebre-authenticat-emqrxrkwqdd.ws-eu62.gitpod.io/api/register", {
+				fetch(process.env.BACKEND_URL + "/api/register", {
 					method: 'POST',
 					headers: {
 						"Content-Type": "application/json"
@@ -66,7 +66,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			privada: () => {
 				const store = getStore();
-				fetch("https://3001-manuelcebre-authenticat-emqrxrkwqdd.ws-eu62.gitpod.io/api/private", {
+				fetch(process.env.BACKEND_URL + "/api/private", {
 					method: 'GET',
 					headers: {
 						"Content-Type": "application/json",
